@@ -1,0 +1,4 @@
+Multiply 5
+Add 5
+Divide 3
+Apply 5

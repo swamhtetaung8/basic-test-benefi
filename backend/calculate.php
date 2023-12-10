@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["file"])) {
         # Check if moving uploaded file from temporary directory succeeded
         if ($destinationFilePath !== false) {
             $executeCalculation = new CalculateController();
-            $executeCalculation->processInstructions($fileName);
+            $executeCalculation->processInstructions($fileName, UPLOAD_DIR);
         } else {
             Helper::response("error", null, 400, "Unable to move the uploaded file.");
         }

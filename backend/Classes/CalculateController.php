@@ -7,9 +7,9 @@ use Classes\Helper;
 
 class CalculateController
 {
-    public function processInstructions($filename)
+    public function processInstructions($filename, $dirname)
     {
-        $filePath = UPLOAD_DIR . "/" . $filename;
+        $filePath = $dirname . "/" . $filename;
 
         $lines = file($filePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 
@@ -21,7 +21,12 @@ class CalculateController
 
         $lastLine = end($lines);
         $lastLineParts = explode(' ', $lastLine);
+        $applyValue = $lastLineParts[1];
         $isLastLineApply = strtolower($lastLineParts[0]) === 'apply';
+
+        if (!is_numeric($applyValue)) {
+            return Helper::response("error", null, 422, "'apply' value must be a number.");
+        }
 
         if ($isLastLineApply) {
             $applyNumber = $lastLineParts[1];
@@ -30,27 +35,31 @@ class CalculateController
             foreach ($lines as $line) {
                 $parts = explode(' ', $line);
 
-                if (count($parts) != 2) {
-                    unlink($filePath);
-                    Helper::response("error", null, 422, "Invalid instruction format - '$line'.");
-                    break;
+                if (count($parts) !== 2) {
+                    // unlink($filePath);
+                    return Helper::response("error", null, 422, "Invalid instruction format - '$line'.");
                 }
 
                 [$keyword, $number] = $parts;
+
+                if (!is_numeric($number)) {
+                    // unlink($filePath);
+                    return Helper::response("error", null, 400, "Invalid value, only numbers are allowed.");
+                }
 
                 $keyword = strtolower($keyword);
                 $number = floatval($number);
 
                 if ($keyword === 'apply') {
-                    unlink($filePath);
-                    Helper::response("success", $calculator->getResult(), 200);
+                    // unlink($filePath);
+                    return Helper::response("success", $calculator->getResult(), 200);
                 } else {
                     $calculator->applyOperation($keyword, $number);
                 }
             }
         } else {
-            unlink($filePath);
-            Helper::response("error", null, 422, "'apply' instruction not found at the last of instructions.");
+            // unlink($filePath);
+            return Helper::response("error", null, 422, "'apply' instruction not found at the last of instructions.");
         }
     }
 }

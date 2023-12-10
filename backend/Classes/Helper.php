@@ -4,8 +4,6 @@ namespace Classes;
 
 require 'vendor/autoload.php';
 
-use Classes\Calculator;
-
 class Helper
 {
     public static function response($status, $data, $statusCode = 200, string $message = null)
@@ -33,7 +31,7 @@ class Helper
 
         echo $jsonResponse;
 
-        exit();
+        return $jsonResponse;
     }
 
     public static function handleFileUploadError($errorCode)
@@ -73,7 +71,10 @@ class Helper
     public static function createDestinationDirectory($destinationDirectory)
     {
         if (!is_dir($destinationDirectory)) {
-            mkdir($destinationDirectory);
+            if (mkdir($destinationDirectory)) {
+                return true;
+            }
         }
+        return false;
     }
 }

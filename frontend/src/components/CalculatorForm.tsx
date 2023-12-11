@@ -46,6 +46,7 @@ const CalculatorForm = () => {
   return (
     <div className="flex-1 max-w-screen-xl px-4 py-16 mx-auto">
       <div className="max-w-lg mx-auto">
+        {/* Calculator Form */}
         <form
           data-testid="calculator-form"
           onSubmit={handleFileSubmit}
@@ -76,6 +77,7 @@ const CalculatorForm = () => {
           </button>
         </form>
       </div>
+      {/* Result Modal */}
       {openModal && <Result result={result} setOpenModal={setOpenModal} />}
     </div>
   );

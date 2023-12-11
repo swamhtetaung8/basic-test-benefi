@@ -13,4 +13,7 @@ export default defineConfig({
     setupFiles: "./src/test/setup.ts",
     css: true,
   },
+  server: {
+    host: "0.0.0.0",
+  },
 });

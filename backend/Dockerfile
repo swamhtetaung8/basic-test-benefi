@@ -1,6 +1,6 @@
 FROM php:8.3-cli
 
-WORKDIR /backend
+WORKDIR /home/backend
 
 COPY . .
 

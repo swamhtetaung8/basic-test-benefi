@@ -47,6 +47,7 @@ const CalculatorForm = () => {
     <div className="flex-1 max-w-screen-xl px-4 py-16 mx-auto">
       <div className="max-w-lg mx-auto">
         <form
+          data-testid="calculator-form"
           onSubmit={handleFileSubmit}
           action=""
           encType="multipart/form-data"

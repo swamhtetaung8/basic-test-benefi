@@ -10,7 +10,9 @@ const Result = ({ result, setOpenModal }: ResultProps) => {
     setOpenModal(false);
   };
   return (
-    <div className="absolute top-0 left-0 flex items-center justify-center w-screen h-screen">
+    <div
+      data-testid="result-component"
+      className="absolute top-0 left-0 flex items-center justify-center w-screen h-screen">
       <div className="absolute z-10 w-full h-full bg-black/20"></div>
       <div className="relative z-20 p-5 m-5 md:m-0 md:p-10 space-y-5 bg-white rounded-md shadow-md md:min-w-[300px]">
         {result?.message && (

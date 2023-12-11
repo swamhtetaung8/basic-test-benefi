@@ -16,6 +16,28 @@ cd basic-test-benefi
 
 ### Easy run with docker-compose up
 
+Run docker daemon by opening docker desktop app or from the command line.(It differs according to operating system.)
+
+### On Linux
+
+```
+sudo systemctl start docker
+```
+
+### On Windows
+
+```
+dockerd
+```
+
+### On macOS
+
+```
+sudo /Applications/Docker.app/Contents/MacOS/Dockerd
+```
+
+After starting the docker daemon, run the following command
+
 ```
 docker-compose up
 ```

@@ -67,6 +67,19 @@ class CalculatorControllerTest extends TestCase
     }
 
     /** @test **/
+    public function does_it_handle_invalid_operators_from_instruction()
+    {
+        $test = $this->calculateController->processInstructions("instruction6.txt", "test-instructions");
+        $expected = json_encode([
+            'status' => "error",
+            'data' => null,
+            'message' => "Unknown operator 'mad'."
+        ]);
+
+        $this->assertEquals($expected, $test);
+    }
+
+    /** @test **/
     public function does_it_calculate_correctly()
     {
         $test = $this->calculateController->processInstructions("instruction5.txt", "test-instructions");

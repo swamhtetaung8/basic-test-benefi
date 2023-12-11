@@ -21,7 +21,7 @@ class CalculatorTest extends TestCase
         $expected = json_encode([
             'status' => "error",
             'data' => null,
-            'message' => "Unknown operator 'aaa'"
+            'message' => "Unknown operator 'aaa'."
         ]);
 
         $this->assertEquals($expected, $this->calculator->applyOperation('aaa', 9));

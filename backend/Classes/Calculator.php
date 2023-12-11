@@ -31,7 +31,7 @@ class Calculator
                 }
                 break;
             default:
-                return Helper::response("error", null, 400, "Unknown operator '$operator'");
+                return Helper::response("error", null, 400, "Unknown operator '$operator'.");
         }
     }
 

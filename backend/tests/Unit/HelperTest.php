@@ -22,7 +22,7 @@ class HelperTest extends TestCase
     /** @test **/
     public function is_folder_create_correctly()
     {
-        // Can only be correct if the folder doesn't exist
+        // Can only be correct if the 'test' folder doesn't exist
         $expected = true;
         $this->assertEquals($expected, Helper::createDestinationDirectory('test'));
     }

@@ -15,8 +15,7 @@ class CalculateController
 
         if ($lines === false) {
             unlink($filePath);
-            Helper::response("error", null, 400, "Unable to read the file.");
-            return;
+            return Helper::response("error", null, 400, "Unable to read the file.");
         }
 
         $lastLine = end($lines);
@@ -54,7 +53,13 @@ class CalculateController
                     // unlink($filePath);
                     return Helper::response("success", $calculator->getResult(), 200);
                 } else {
-                    $calculator->applyOperation($keyword, $number);
+                    $result = $calculator->applyOperation($keyword, $number);
+
+                    // Check if applyOperation returned something
+                    if ($result !== null) {
+                        // unlink($filePath);
+                        return $result;
+                    }
                 }
             }
         } else {

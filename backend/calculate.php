@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["file"])) {
 
         # Check if the file type is txt
         if ($mime !== "text/plain") {
-            Helper::response("error", null, 400, "Only text/plain files are allowed");
+            return Helper::response("error", null, 400, "Only text/plain files are allowed");
         }
         $fileName =  pathinfo($file["name"], PATHINFO_FILENAME) . time() . '.txt';
         $destinationDirectory = UPLOAD_DIR;
@@ -33,12 +33,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["file"])) {
             $executeCalculation = new CalculateController();
             $executeCalculation->processInstructions($fileName, UPLOAD_DIR);
         } else {
-            Helper::response("error", null, 400, "Unable to move the uploaded file.");
+            return Helper::response("error", null, 400, "Unable to move the uploaded file.");
         }
     } else {
         $fileUploadError = Helper::handleFileUploadError($file["error"]);
-        Helper::response("error", null, 400, "File submit not successful.");
+        return Helper::response("error", null, 400, "File submit not successful.");
     }
 } else {
-    Helper::response("error", null, 400, "Invalid request.");
+    return Helper::response("error", null, 400, "Invalid request.");
 }
